@@ -1,5 +1,14 @@
 Manage::Application.routes.draw do
 
+  resources :tasks
+
+  controller :tasks do
+    post 'addTaskToProject' => :add_task_to_project
+  end
+
+
+  get "manage/index"
+
   #get "projectuser/add_user_to_project"
 
    resources :projects
@@ -19,6 +28,7 @@ Manage::Application.routes.draw do
     get 'add_user' => :add_user , :on => :member
   end
 
+  root :to => 'manage#index', :as => 'manage'
 
   resources :users
 

@@ -1,0 +1,22 @@
+<div class="cart_title" ></div>
+<p>hello
+<%= user.name %>
+  Your current projects :
+<table>
+
+  <tr class="total_line" >
+    <td colspan="1" ></td>
+    <% user.projects.each do |project| %>
+      <tr>
+        <td class='project_name'><%= project.name %></td>
+        <td><%= button_to 'show', project, :method => :get   %> </td>
+
+      </tr>
+  <% end %>
+
+  </tr>
+</table>
+
+
+</p>
+

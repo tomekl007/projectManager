@@ -29,7 +29,10 @@
 
     <% if session[:user_id] %>
 
+
+        <%= render User.find(session[:user_id]) %>
         <%= button_to 'Logout', logout_path, :method => :delete   %>
+
     <% end %>
     <!-- END_HIGHLIGHT -->
   </div>
