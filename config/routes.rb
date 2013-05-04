@@ -4,6 +4,7 @@ Manage::Application.routes.draw do
 
   controller :tasks do
     post 'addTaskToProject' => :add_task_to_project
+    get 'markTaskAsDone' => :mark_task_as_done
   end
 
 
@@ -22,6 +23,7 @@ Manage::Application.routes.draw do
 
   controller :projectuser do
   post 'addUserTo' => :add_user_to_project
+  post 'deleteUserFrom' => :delete_user_from_project
   end
 
   resources :projects do

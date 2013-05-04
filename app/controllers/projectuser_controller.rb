@@ -25,5 +25,20 @@ class ProjectuserController < ApplicationController
       # format.json {render :json => @product.to_json(:include=>:orders)}
       format.html { render action: 'add_user_to_project' }
     end
- end
+  end
+
+  def delete_user_from_project
+    logger.info "delete_user_from_project #{params[:project_id]} uid #{params[:user_id]}"
+    @project = Project.find(params[:project_id])
+    @user = User.find(params[:user_id])
+    #if @project.users.include?(@user)
+      logger.info "include so destroy ->>>"
+      @project.users.destroy @user
+   #end
+
+    redirect_to @project
+    return
+
+  end
+
 end

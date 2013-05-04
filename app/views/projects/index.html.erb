@@ -5,29 +5,25 @@
 <!-- END_HIGHLIGHT -->
 <h1>Listing projects</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+
 
 <% @projects.each do |project| %>
-  <tr>
-    <td><%= project.name %></td>
-    <td><%= project.description %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% if session[:user_id] %>
+      <div class="entry" >
 
-       <td><%= button_to('join2', {:controller => "projectuser", :action => "add_user_to_project", :project_id => project.id})%></td>
+        <h3><%= project.name %></h3>
+        <%= sanitize(project.description) %>
+
+        <%= link_to 'Show', project %>
+        <%= link_to 'Edit', edit_project_path(project) %>
+        <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% if session[:user_id] %>
+
+            <%= button_to('join2', {:controller => "projectuser", :action => "add_user_to_project", :project_id => project.id})%>
+        <% end %>
+
+      </div>
+
   <% end %>
-  </tr>
-<% end %>
-</table>
 
 <br />
 

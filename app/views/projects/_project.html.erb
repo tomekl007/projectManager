@@ -1,28 +1,52 @@
 Users in this project :
 <table>
-  <% @project.users.each do |user| %>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 
+  <% @project.users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-
-
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'destroy', user, :confirm => 'Are you sure?',
+                        :method => :delete %></td>
+        <td><%= button_to('delete from project', {:controller => "projectuser", :action => "delete_user_from_project", :project_id => @project, :user_id=>user.id})%></td>
       </tr>
-
   <% end %>
 </table>
+
 
 All tasks in this project
 <table>
-  <% @project.tasks.each do |task| %>
+  <tr>
+    <th>Name</th>
+    <th>Deadline</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 
+  <% @project.tasks.each do |task| %>
       <tr>
         <td><%= task.name %></td>
+        <td><%= task.deadline %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if task.done  %>
+        <td><%= image_tag 'Done_small.png' %>  </td>
 
+        <% else %>
+        <td><%= image_tag 'Red_x.svg.png' %> <%= link_to 'mark as done', {:controller => "tasks", :action => "mark_task_as_done", :task_id => task.id, :project_id=>@project.id } %></td>
+        <% end %>
 
       </tr>
-
   <% end %>
 </table>
+
 
 <%= link_to "Add task", {:controller => "tasks", :action => "new", :project_id => @project.id }%>
 

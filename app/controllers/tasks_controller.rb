@@ -99,4 +99,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def mark_task_as_done
+    @task = Task.find(params[:task_id])
+    @task.update_attributes(:done => true)
+    @project = Project.find(params[:project_id])
+
+    redirect_to @project
+
+  end
+
 end
