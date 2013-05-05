@@ -46,6 +46,7 @@ class TasksController < ApplicationController
     logger.info " creates #{params[:project_id]}"
     logger.info " creates #{session[:project_id]}"
     @task.project = Project.find(session[:project_id])
+    Notifier.new_task(@task).deliver   #send notification
 
     respond_to do |format|
       if @task.save
@@ -90,6 +91,7 @@ class TasksController < ApplicationController
     logger.info "task new get param #{params[:project_id]}"
     @project = Project.find(params[:project_id])
     @task = Task.new(params[:task])
+    Notifier.new_task(@task).deliver   #send notification
     if @task.save
       format.html { redirect_to @task, notice: 'Task was successfully created.' }
       format.json { render json: @task, status: :created, location: @task }
@@ -103,6 +105,8 @@ class TasksController < ApplicationController
     @task = Task.find(params[:task_id])
     @task.update_attributes(:done => true)
     @project = Project.find(params[:project_id])
+    Notifier.task_succed(@task).deliver
+
 
     redirect_to @project
 
