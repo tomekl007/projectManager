@@ -1,8 +1,14 @@
 == Welcome to Rails
 
 1.git clone project_url
+
 2.cd projectManager
+
 3.bundle install
+
 4.rake db:migrate
+
 5.rails server
+
 6.go to localhost:3000 and start using app
+
